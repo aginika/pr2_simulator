@@ -81,6 +81,7 @@ catkin_package(
   LIBRARIES
     gazebo_ros_controller_manager
     gazebo_ros_power_monitor
+    gazebo_force_set_joint_position
 )
 
 # system dependencies
@@ -132,11 +133,18 @@ add_dependencies(gazebo_ros_power_monitor
   ${PROJECT_NAME}_generate_messages_cpp)
 target_link_libraries(gazebo_ros_power_monitor ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
+add_library(gazebo_force_set_joint_position src/gazebo_force_set_joint_position.cpp)
+add_dependencies(gazebo_force_set_joint_position
+  ${PROJECT_NAME}_gencfg
+  ${PROJECT_NAME}_generate_messages_cpp)
+target_link_libraries(gazebo_force_set_joint_position ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+
 # install libraries
 install(
   TARGETS 
     gazebo_ros_controller_manager
     gazebo_ros_power_monitor
+    gazebo_force_set_joint_position
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 )
